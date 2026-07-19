@@ -1,188 +1,278 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-6">
+    <meta charset="UTF-8">
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Visitor Pass</title>
+    <title>PC Servicios | Pase de visitante demo</title>
+
+    <!-- Fuente Manjari -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&display=swap"
+        rel="stylesheet"
+    >
 
     <style>
+        :root {
+            --verde-principal: #1C5449;
+            --fondo-pagina: #EFF5F5;
+            --blanco: #FFFFFF;
+            --rojo-demo: #A42323;
+            --fondo-demo: #FFF1F1;
+        }
+
         * {
             box-sizing: border-box;
         }
 
+        html,
         body {
             margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        body {
             min-height: 100vh;
-            padding: 24px 20px 16px;
 
-            font-family: "Trebuchet MS", Arial, sans-serif;
+            background-color: var(--fondo-pagina);
+            color: var(--verde-principal);
 
-            background-color: #eef4f3;
-            color: #07574f;
-
-            text-align: center;
+            font-family: "Manjari", Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 400;
 
             display: flex;
             flex-direction: column;
+
+            text-align: center;
         }
 
-        .page {
+        .pagina {
             width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
+            min-height: 100vh;
+
+            padding: 24px 18px 0;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .brand {
-            display: inline-block;
+        /* Encabezado equivalente al bloque superior de 420 × 67 px */
+        .marca {
+            width: 420px;
+            max-width: 100%;
+            min-height: 67px;
 
-            margin-bottom: 12px;
-            padding: 12px 28px;
+            padding: 12px 20px 7px;
 
-            background-color: #195f54;
-            color: white;
+            background-color: var(--verde-principal);
+            color: var(--blanco);
 
-            font-size: clamp(30px, 5vw, 55px);
-            font-weight: 300;
-            letter-spacing: 1px;
+            font-family: "Manjari", Arial, sans-serif;
+            font-size: 47px;
+            font-weight: 400;
+            line-height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        h1 {
-            margin: 0 0 12px;
+        .titulo {
+            margin: 14px 0 0;
 
-            color: #07574f;
+            color: var(--verde-principal);
 
-            font-size: clamp(30px, 4vw, 42px);
-            font-weight: 500;
+            font-family: "Manjari", Arial, sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 56px;
         }
 
-        .demo-label {
-            display: inline-block;
+        .aviso-demo {
+            margin-top: 2px;
+            padding: 5px 12px 3px;
 
-            margin-bottom: 14px;
-            padding: 7px 14px;
-
-            border: 2px solid #a92323;
-            border-radius: 5px;
-
-            background-color: #fff2f2;
-            color: #a92323;
-
-            font-weight: bold;
-            letter-spacing: 0.5px;
-        }
-
-        .status {
-            margin: 0 0 20px;
-
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .validity {
-            margin: 0 0 26px;
-
-            font-size: 17px;
-            line-height: 1.5;
-        }
-
-        .visitor-card {
-            width: 100%;
-            max-width: 500px;
-
-            margin: 0 auto 18px;
-            padding: 17px 25px;
-
+            border: 2px solid var(--rojo-demo);
             border-radius: 4px;
 
-            background-color: #195f54;
-            color: white;
+            background-color: var(--fondo-demo);
+            color: var(--rojo-demo);
 
-            font-size: 17px;
-            line-height: 1.8;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 20px;
         }
 
-        .visitor-card p {
+        .estado {
+            width: auto;
+            min-height: 22.39px;
+
+            margin: 8px 0 0;
+
+            color: var(--verde-principal);
+
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 22.39px;
+        }
+
+        .vigencia {
+            width: 500px;
+            max-width: 100%;
+            min-height: 22.39px;
+
+            margin: 17px 0 0;
+
+            color: var(--verde-principal);
+
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 22.39px;
+        }
+
+        .tarjeta {
+            width: 500px;
+            max-width: 100%;
+            min-height: 176px;
+
+            margin-top: 19px;
+            padding: 16px;
+
+            border-radius: 3px;
+
+            background-color: var(--verde-principal);
+            color: var(--blanco);
+
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 30px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .tarjeta p {
             margin: 0;
         }
 
-        .visitor-card strong {
-            font-weight: 600;
-        }
+        .boton {
+            width: 159px;
+            min-height: 49px;
 
-        .register-button {
-            display: inline-block;
+            margin-top: 17px;
+            padding: 16px 16px 12px;
 
-            padding: 15px 24px;
+            border: none;
+            border-radius: 4px;
 
-            border: 0;
-            border-radius: 5px;
+            background-color: var(--verde-principal);
+            color: var(--blanco);
 
-            background-color: #195f54;
-            color: white;
-
-            font-family: inherit;
-            font-size: 16px;
-            font-weight: bold;
+            font-family: "Manjari", Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 20px;
 
             cursor: pointer;
         }
 
-        .register-button:hover {
-            background-color: #104d44;
+        .boton:hover {
+            filter: brightness(0.92);
         }
 
-        .register-button:active {
-            transform: translateY(1px);
+        .boton:disabled {
+            cursor: default;
+            opacity: 0.7;
         }
 
-        .message {
+        .mensaje {
             display: none;
 
-            width: 100%;
-            max-width: 500px;
+            width: 500px;
+            max-width: 100%;
 
-            margin: 18px auto 0;
-            padding: 13px;
+            margin-top: 14px;
+            padding: 10px 14px 7px;
 
-            border: 1px solid #195f54;
-            border-radius: 5px;
+            border: 1px solid var(--verde-principal);
+            border-radius: 4px;
 
-            background-color: white;
-            color: #195f54;
-
-            font-weight: bold;
-        }
-
-        .footer {
-            margin-top: auto;
-            padding-top: 18px;
+            background-color: var(--blanco);
+            color: var(--verde-principal);
 
             font-size: 16px;
-            line-height: 1.5;
+            line-height: 22px;
+        }
+
+        .pie {
+            width: 100%;
+
+            margin-top: auto;
+            padding: 18px 20px 10px;
+
+            color: var(--verde-principal);
+
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 22.39px;
+        }
+
+        .pie strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--rojo-demo);
         }
 
         @media (max-width: 600px) {
-            body {
-                padding: 20px 14px;
+            .pagina {
+                padding: 18px 12px 0;
             }
 
-            .brand {
+            .marca {
                 width: 100%;
-                padding: 12px 10px;
+                min-height: 62px;
+
+                font-size: 39px;
+                line-height: 43px;
             }
 
-            .visitor-card {
-                padding: 16px;
-                font-size: 16px;
+            .titulo {
+                font-size: 35px;
+                line-height: 48px;
             }
 
-            .validity {
-                font-size: 16px;
+            .vigencia {
+                line-height: 24px;
+            }
+
+            .tarjeta {
+                min-height: auto;
+                padding: 15px 10px;
+                line-height: 28px;
+            }
+
+            .pie {
+                font-size: 15px;
+                line-height: 21px;
             }
         }
     </style>
@@ -190,84 +280,99 @@
 
 <body>
 
-    <main class="page">
+    <main class="pagina">
 
-        <div class="brand">
-            Bahia Soliman
+        <div class="marca">
+            PC SERVICIOS
         </div>
 
-        <h1>Pase de Visitante</h1>
+        <h1 class="titulo">
+            Pase de Visitante
+        </h1>
 
-        <p class="status">
-            Pase Válido
-        </p>
+        <div class="aviso-demo">
+            SIMULACIÓN — NO VÁLIDO PARA ACCESO
+        </div>
 
-        <p class="validity">
-            Acceso válido desde
-            <strong>Jul 21, 2026 12:00 pm</strong>
+        <div class="estado" id="estado">
+            Pase de prueba válido
+        </div>
+
+        <div class="vigencia">
+            Acceso de demostración válido desde
+            <span id="fechaInicio">Jul 19, 2026 12:00 pm</span>
             hasta
-            <strong>Jul 28, 2026 12:00 pm</strong>
-        </p>
+            <span id="fechaFin">Jul 20, 2026 12:00 pm</span>
+        </div>
 
-        <section class="visitor-card">
+        <section class="tarjeta">
+
             <p>
-                <strong>Casa #:</strong>
-                
+                Casa #: DEMO
             </p>
 
             <p>
-                <strong>Nombre de la Villa:</strong>
-                 Mantaray
+                Nombre del proyecto: PC Servicios
             </p>
 
             <p>
-                <strong>Nombre del visitante:</strong>
-                Pablo Pineda +3
+                Nombre del visitante: Pablo Pineda +3
             </p>
 
             <p>
-                <strong>Visitantes adicionales:</strong>
-                .
+                Visitantes adicionales: .
             </p>
 
             <p>
-                <strong>Vehículo del visitante:</strong>
-                Vehículo particular
+                Vehículo del visitante: Vehículo particular
             </p>
+
         </section>
 
         <button
-            class="register-button"
-            id="registerButton"
             type="button"
+            class="boton"
+            id="botonRegistro"
         >
-            REGISTRAR VISITA
+            REGISTRAR PRUEBA
         </button>
 
-        <div class="message" id="message">
-            Access Recorded. Thank you.
+        <div class="mensaje" id="mensaje">
+            Visita de demostración registrada correctamente.
         </div>
+
+        <footer class="pie">
+            <strong>
+                PÁGINA DE DEMOSTRACIÓN — NO AUTORIZA EL ACCESO
+            </strong>
+
+            Esta simulación fue creada para pruebas internas de PC Servicios.
+            No representa un pase emitido por ningún fraccionamiento,
+            residencial, hotel o administración.
+        </footer>
 
     </main>
 
-    <footer class="footer">
-        Si recibes un código QR para acceder a la Bahia, reconoces que has leído y aceptas las reglas para visitantes. 
-        Para más info, visita bahiasoliman.com.mx.
-    </footer>
-
     <script>
-        const registerButton =
-            document.getElementById("registerButton");
+        const botonRegistro =
+            document.getElementById("botonRegistro");
 
-        const message =
-            document.getElementById("message");
+        const mensaje =
+            document.getElementById("mensaje");
 
-        registerButton.addEventListener("click", function () {
-            message.style.display = "block";
-            registerButton.disabled = true;
-            registerButton.textContent = "VISITA DE PRUEBA REGISTRADA";
-            registerButton.style.opacity = "0.7";
-            registerButton.style.cursor = "default";
+        const estado =
+            document.getElementById("estado");
+
+        botonRegistro.addEventListener("click", function () {
+            mensaje.style.display = "block";
+
+            estado.textContent =
+                "Prueba registrada";
+
+            botonRegistro.textContent =
+                "PRUEBA REGISTRADA";
+
+            botonRegistro.disabled = true;
         });
     </script>
 
