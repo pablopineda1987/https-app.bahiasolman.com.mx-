@@ -1,287 +1,351 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Visitor Pass</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Visitor Pass Demo</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect"
+    <link
+        rel="preconnect"
         href="https://fonts.gstatic.com"
-        crossorigin>
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&display=swap"
-        rel="stylesheet">
+        rel="stylesheet"
+    >
 
     <style>
+        :root {
+            --verde: #1C5449;
+            --fondo: #EFF5F5;
+            --blanco: #FFFFFF;
+            --barra: #252525;
+            --rojo: #A61F1F;
+            --rojo-fondo: #FFF2F2;
+        }
 
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
         body {
             margin: 0;
+            min-height: 100%;
+        }
 
-            background: #EFF5F5;
+        body {
+            min-height: 100vh;
 
-            font-family: 'Manjari',
-                Helvetica,
-                Arial,
-                sans-serif;
+            background-color: var(--fondo);
+            color: var(--verde);
+
+            font-family: "Manjari", Helvetica, Arial, sans-serif;
+            font-size: 16px;
 
             text-align: center;
         }
 
-        .contenedor {
+        .pagina {
             width: 100%;
+            min-height: 100vh;
+
+            padding: 18px 18px 12px;
 
             display: flex;
             flex-direction: column;
             align-items: center;
-
-            margin-top: 20px;
         }
 
-        /* LOGO */
+        .barra-superior {
+            display: none;
+
+            width: 100%;
+            min-height: 40px;
+
+            margin-bottom: 14px;
+            padding: 9px 15px 5px;
+
+            border-radius: 2px;
+
+            background-color: var(--barra);
+            color: var(--blanco);
+
+            font-size: 17px;
+            line-height: 25px;
+
+            align-items: center;
+            justify-content: center;
+        }
 
         .logo {
+            display: block;
+
             width: 420px;
+            max-width: 100%;
             height: 67px;
 
-            object-fit: cover;
-
-            max-width: 95%;
+            object-fit: fill;
         }
 
-        /* TITULO */
+        .titulo {
+            margin: 9px 0 0;
 
-        h1 {
-            margin-top: 10px;
-            margin-bottom: 0;
-
-            color: #1C5449;
+            color: var(--verde);
 
             font-size: 40px;
-            font-weight: 900;
+            font-weight: 700;
+            line-height: 56px;
         }
-
-        /* SUBTITULO */
 
         .estado {
+            min-height: 23px;
 
-            margin-top: 10px;
+            margin-top: 0;
 
-            color: #1C5449;
-
-            font-size: 16px;
-        }
-
-        /* FECHA */
-
-        .fecha {
-
-            width: 550px;
-            max-width: 95%;
-
-            margin-top: 15px;
-
-            color: #1C5449;
+            color: var(--verde);
 
             font-size: 16px;
+            line-height: 23px;
         }
 
-        /* TARJETA */
+        .vigencia {
+            width: 800px;
+            max-width: 100%;
+
+            margin-top: 16px;
+
+            color: var(--verde);
+
+            font-size: 16px;
+            line-height: 23px;
+
+            white-space: nowrap;
+        }
 
         .tarjeta {
-
             width: 500px;
-            max-width: 95%;
-
+            max-width: 100%;
             min-height: 176px;
 
-            margin-top: 20px;
-
-            background: #1C5449;
-
-            color: white;
+            margin-top: 19px;
+            padding: 16px;
 
             border-radius: 3px;
+
+            background-color: var(--verde);
+            color: var(--blanco);
+
+            font-size: 16px;
+            line-height: 30px;
 
             display: flex;
             flex-direction: column;
             justify-content: center;
-
-            padding: 15px;
-
-            box-sizing: border-box;
-
-            line-height: 30px;
-
-            font-size: 16px;
         }
 
-        /* BOTON */
+        .tarjeta p {
+            margin: 0;
+        }
 
-        button {
-
+        .boton {
             width: 159px;
-            height: 49px;
+            min-height: 49px;
 
-            margin-top: 20px;
+            margin-top: 17px;
+            padding: 16px 16px 12px;
 
-            border: none;
-
+            border: 0;
             border-radius: 4px;
 
-            background: #1C5449;
+            background-color: var(--verde);
+            color: var(--blanco);
 
-            color: white;
-
-            font-family: 'Manjari';
-
+            font-family: "Manjari", Helvetica, Arial, sans-serif;
             font-size: 15px;
+            font-weight: 700;
 
             cursor: pointer;
         }
 
-        button:hover {
-            opacity: 0.9;
+        .boton:hover {
+            filter: brightness(0.92);
         }
 
-        /* MENSAJE */
-
-        .mensaje {
-
-            display: none;
-
-            margin-top: 15px;
-
-            color: #1C5449;
-
-            font-size: 16px;
+        .boton:disabled {
+            opacity: 0.7;
+            cursor: default;
         }
 
-        /* FOOTER */
+        .aviso-demo {
+            margin-top: 17px;
+            padding: 6px 13px 3px;
+
+            border: 2px solid var(--rojo);
+            border-radius: 4px;
+
+            background-color: var(--rojo-fondo);
+            color: var(--rojo);
+
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 21px;
+        }
 
         .footer {
+            width: 100%;
 
-            width: 90%;
+            margin-top: auto;
+            padding: 22px 15px 4px;
 
-            margin-top: 30px;
-
-            color: #1C5449;
+            color: var(--verde);
 
             font-size: 16px;
-
-            line-height: 24px;
+            line-height: 23px;
         }
 
-        .warning {
-
-            margin-top: 10px;
-
-            color: red;
-
-            font-weight: bold;
+        @media (max-width: 850px) {
+            .vigencia {
+                white-space: normal;
+            }
         }
 
+        @media (max-width: 600px) {
+            .pagina {
+                padding: 16px 12px 10px;
+            }
+
+            .logo {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 420 / 67;
+            }
+
+            .titulo {
+                font-size: 35px;
+                line-height: 48px;
+            }
+
+            .tarjeta {
+                min-height: auto;
+                padding: 15px 12px;
+                line-height: 28px;
+            }
+
+            .footer {
+                font-size: 15px;
+                line-height: 21px;
+            }
+        }
     </style>
-
 </head>
 
 <body>
 
-    <div class="contenedor">
+    <main class="pagina">
 
-        <!-- CAMBIA ESTA IMAGEN -->
+        <div
+            id="barra"
+            class="barra-superior"
+            role="status"
+            aria-live="polite"
+        >
+            Access recorded. Thank you.
+        </div>
 
         <img
             src="1.png"
+            alt="Encabezado de demostración"
             class="logo"
-            alt="PC Servicios">
+        >
 
-        <h1>
-            Pase de Visitante
+        <h1 class="titulo">
+            Visitor Pass
         </h1>
 
-        <div class="estado">
+        <div
+            id="estado"
+            class="estado"
+        >
             Pase Válido
         </div>
 
-        <div class="fecha">
-            Acceso válido desde Jul 21, 2026
-            12:00 pm hasta Jul 28, 2026
-            12:00 pm
+        <div class="vigencia">
+            Acceso válido desde Jul 21, 2026 12:00 pm hasta Jul 28, 2026 12:00 pm
         </div>
 
-        <div class="tarjeta">
+        <section class="tarjeta">
 
-            <div>
-                Casa #:
-            </div>
+            <p>
+                Casa #: DEMO
+            </p>
 
-            <div>
-                Nombre de la Villa:
-                Mantaray
-            </div>
+            <p>
+                Nombre de la Villa: Sitio de capacitación
+            </p>
 
-            <div>
-                Nombre del Visitante:
-                Pablo Pineda +3
-            </div>
+            <p>
+                Nombre del Visitante: Pablo Pineda +3
+            </p>
 
-            <div>
-                Nombres del Visitante
-                Adicionales:
-                .
-            </div>
+            <p>
+                Nombres del Visitante Adicionales: .
+            </p>
 
-            <div>
-                Vehículo del Visitante:
-                Vehículo particular
-            </div>
+            <p>
+                Vehículo del Visitante: Vehículo particular
+            </p>
 
-        </div>
+        </section>
 
         <button
-            onclick="registrar()">
-
+            id="botonRegistro"
+            class="boton"
+            type="button"
+            onclick="registrarVisita()"
+        >
             REGISTRAR VISITA
-
         </button>
 
-        <div
-            id="mensaje"
-            class="mensaje">
-
-            Visita registrada.
-
+        <div class="aviso-demo">
+            SIMULACIÓN — NO VÁLIDO PARA ACCESO
         </div>
 
-        <div class="footer">
+        <footer class="footer">
+            Si recibes un código QR para esta demostración, reconoces que se
+            trata de una prueba interna de capacitación. Esta página no
+            constituye una autorización real de acceso.
+        </footer>
 
-            Si recibes un código QR para acceder a la Bahia, reconoces que has leído y aceptas las reglas para visitantes. 
-            Para más info, visita bahiasoliman.com.mx.
-
-        </div>
-
-    </div>
+    </main>
 
     <script>
+        function registrarVisita() {
+            const barra = document.getElementById("barra");
+            const boton = document.getElementById("botonRegistro");
+            const estado = document.getElementById("estado");
 
-        function registrar() {
+            barra.style.display = "flex";
 
-            document
-                .getElementById(
-                    "mensaje"
-                )
-                .style
-                .display = "block";
+            estado.textContent = "Visita de prueba registrada";
 
+            boton.textContent = "VISITA REGISTRADA";
+            boton.disabled = true;
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
         }
-
     </script>
 
 </body>
-
 </html>
