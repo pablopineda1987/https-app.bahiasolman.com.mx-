@@ -1,44 +1,279 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Mi primera página</title>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>PC Servicios - Pase de visitante</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial;
+            margin: 0;
+            min-height: 100vh;
+            padding: 24px 20px 16px;
+
+            font-family: "Trebuchet MS", Arial, sans-serif;
+
+            background-color: #eef4f3;
+            color: #07574f;
+
             text-align: center;
-            margin-top: 100px;
-            background-color: #F5F5F5;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .brand {
+            display: inline-block;
+
+            margin-bottom: 12px;
+            padding: 12px 28px;
+
+            background-color: #195f54;
+            color: white;
+
+            font-size: clamp(30px, 5vw, 55px);
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         h1 {
-            color: #1A5C50;
+            margin: 0 0 12px;
+
+            color: #07574f;
+
+            font-size: clamp(30px, 4vw, 42px);
+            font-weight: 500;
         }
 
-        .card {
-            width: 400px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px gray;
+        .demo-label {
+            display: inline-block;
+
+            margin-bottom: 14px;
+            padding: 7px 14px;
+
+            border: 2px solid #a92323;
+            border-radius: 5px;
+
+            background-color: #fff2f2;
+            color: #a92323;
+
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .status {
+            margin: 0 0 20px;
+
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .validity {
+            margin: 0 0 26px;
+
+            font-size: 17px;
+            line-height: 1.5;
+        }
+
+        .visitor-card {
+            width: 100%;
+            max-width: 500px;
+
+            margin: 0 auto 18px;
+            padding: 17px 25px;
+
+            border-radius: 4px;
+
+            background-color: #195f54;
+            color: white;
+
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .visitor-card p {
+            margin: 0;
+        }
+
+        .visitor-card strong {
+            font-weight: 600;
+        }
+
+        .register-button {
+            display: inline-block;
+
+            padding: 15px 24px;
+
+            border: 0;
+            border-radius: 5px;
+
+            background-color: #195f54;
+            color: white;
+
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .register-button:hover {
+            background-color: #104d44;
+        }
+
+        .register-button:active {
+            transform: translateY(1px);
+        }
+
+        .message {
+            display: none;
+
+            width: 100%;
+            max-width: 500px;
+
+            margin: 18px auto 0;
+            padding: 13px;
+
+            border: 1px solid #195f54;
+            border-radius: 5px;
+
+            background-color: white;
+            color: #195f54;
+
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: auto;
+            padding-top: 18px;
+
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 14px;
+            }
+
+            .brand {
+                width: 100%;
+                padding: 12px 10px;
+            }
+
+            .visitor-card {
+                padding: 16px;
+                font-size: 16px;
+            }
+
+            .validity {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<div class="card">
-    <h1>Hola, soy Pablo</h1>
+    <main class="page">
 
-    <p>Esta es mi primera página web.</p>
+        <div class="brand">
+            PC SERVICIOS
+        </div>
 
-    <p>Creada con GitHub Pages.</p>
+        <h1>Pase de Visitante</h1>
 
-    <button onclick="alert('¡Funciona!')">
-        Haz clic aquí
-    </button>
-</div>
+        <div class="demo-label">
+            DEMOSTRACIÓN — NO VÁLIDO PARA ACCESO
+        </div>
+
+        <p class="status">
+            Pase de prueba activo
+        </p>
+
+        <p class="validity">
+            Acceso de demostración válido desde
+            <strong>Jul 19, 2026 12:00 pm</strong>
+            hasta
+            <strong>Jul 20, 2026 12:00 pm</strong>
+        </p>
+
+        <section class="visitor-card">
+            <p>
+                <strong>Proyecto:</strong>
+                PC Servicios
+            </p>
+
+            <p>
+                <strong>Ubicación:</strong>
+                Sitio de demostración
+            </p>
+
+            <p>
+                <strong>Nombre del visitante:</strong>
+                Pablo Pineda +3
+            </p>
+
+            <p>
+                <strong>Visitantes adicionales:</strong>
+                Demostración
+            </p>
+
+            <p>
+                <strong>Vehículo del visitante:</strong>
+                Vehículo particular
+            </p>
+        </section>
+
+        <button
+            class="register-button"
+            id="registerButton"
+            type="button"
+        >
+            REGISTRAR VISITA DE PRUEBA
+        </button>
+
+        <div class="message" id="message">
+            Visita de demostración registrada.
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        Esta página es una simulación desarrollada para pruebas internas de
+        PC Servicios. No constituye una autorización real de acceso.
+    </footer>
+
+    <script>
+        const registerButton =
+            document.getElementById("registerButton");
+
+        const message =
+            document.getElementById("message");
+
+        registerButton.addEventListener("click", function () {
+            message.style.display = "block";
+            registerButton.disabled = true;
+            registerButton.textContent = "VISITA DE PRUEBA REGISTRADA";
+            registerButton.style.opacity = "0.7";
+            registerButton.style.cursor = "default";
+        });
+    </script>
 
 </body>
 </html>
